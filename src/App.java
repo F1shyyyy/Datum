@@ -24,11 +24,11 @@ public class App {
         long dny = ChronoUnit.DAYS.between(datumNarozeni, datumZadane);
 
         if (datumZadane.isAfter(datumNarozeni)) {
-            System.out.printf("V zadanem datu jsi %d dni stary", dny);
+            System.out.printf("V zadanem datu jsi %d dni stary.", dny);
         } else if (datumZadane.isBefore(datumNarozeni)) {
             System.out.printf("Jeste jsi se nenarodil, zbyva ti %s dni do tveho narozeni.", -dny);
         } else if (datumZadane.equals(datumNarozeni)) {
-            System.out.println("Prave jsi se narodil");
+            System.out.println("Prave jsi se narodil.");
         }
     }
 
