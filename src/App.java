@@ -10,14 +10,18 @@ public class App {
     public static void main(String[] args) throws Exception {
         LocalDate datumNarozeni = LocalDate.of(2007, 4, 11);
         LocalDate datumZadane = LocalDate.of(1, 1, 1);
-        int[] datum = zadaniData("Zadej datum (den, mesic, rok): ");
+        System.out.print("Zadej datum (den, mesic, rok): ");
+        String datumString = sc.nextLine();
+        int[] datum = zapsaniDataDoPole(datumString);
         boolean valid = false;
         do {
-            try {
+            valid = overeniData(datum);
+            if (valid) {
                 datumZadane = LocalDate.of(datum[2], datum[1], datum[0]);
-                valid = true;
-            } catch (DateTimeException e) {
-                datum = zadaniData("Neplatne datum, zadej znovu: ");
+            } else{
+                System.out.print("Neplatne datum, zadej znovu: ");
+                datumString = sc.nextLine();
+                datum = zapsaniDataDoPole(datumString);
             }
         } while (!valid);
 
@@ -31,13 +35,13 @@ public class App {
             System.out.println("Prave jsi se narodil.");
         }
     }
-
-    private static int[] zadaniData(String zprava) {
-        System.out.print(zprava);
-        String datum = sc.nextLine();
-        sc.nextLine();
-        int[] datumArr = zapsaniDataDoPole(datum);
-        return datumArr;
+    private static boolean overeniData(int[] datum){
+        try {
+            LocalDate.of(datum[2], datum[1], datum[0]);
+            return true;
+        } catch (DateTimeException e) {
+            return false;
+        }
     }
 
     private static int[] zapsaniDataDoPole(String zadaneDatum) {
